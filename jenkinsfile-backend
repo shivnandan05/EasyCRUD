@@ -44,5 +44,10 @@ pipeline {
             }
             }
         }
+        stage('Quality Gate'){
+                timeout(time:5, unit: TimeUnit.MINUTE){
+                waitForQualityGate() abortOnTimeout: true 
+            }
+        }
     }
 }
