@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'worker'
     }
+    tools{
+        maven 'mvn'
+    }
     stages{
         stage('checkout'){
             steps{
