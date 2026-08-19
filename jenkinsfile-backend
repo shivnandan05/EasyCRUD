@@ -5,6 +5,9 @@ pipeline {
     tools{
         maven 'mvn'
     }
+     environment {
+        my_aws_cred = credentials('aws-cred')
+    }
     stages{
         stage('checkout'){
             steps{
@@ -22,6 +25,15 @@ pipeline {
                 archiveArtifacts artifacts: 'backend/target/*.jar', fingerprint: true
             }
         }
+        }
+        stage('Artifacts to s3'){
+            steps{
+                sh '''
+                 sudo snap install aws-cli --classic
+                 aws s3 cp backend/target/*.jar s3://amnz-shiva-bucket/Artifact/student.jar
+
+                '''
+            }
         }
     }
 }
