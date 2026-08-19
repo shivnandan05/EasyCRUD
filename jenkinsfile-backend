@@ -17,11 +17,11 @@ pipeline {
                  sh'mvn clean package'
                 }
             }
-        }
-        post{
+            post{
             success{
                 archiveArtifacts artifacts: 'backend/target/*.jar', fingerprint: true
             }
+        }
         }
     }
 }
